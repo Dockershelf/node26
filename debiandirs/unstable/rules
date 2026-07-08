@@ -1,0 +1,45 @@
+#!/usr/bin/make -f
+
+export DH_VERBOSE = 1
+export DEB_CFLAGS_MAINT_APPEND = -g0
+export DEB_CXXFLAGS_MAINT_APPEND = -g0
+
+PARALLEL_OPTION := $(filter parallel=%,$(DEB_BUILD_OPTIONS))
+PARALLEL_JOBS := $(patsubst parallel=%,%,$(lastword $(PARALLEL_OPTION)))
+ifeq ($(PARALLEL_JOBS),)
+PARALLEL_JOBS := $(shell nproc)
+endif
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	PATH=/opt/dockershelf/python/bin:$$PATH PYTHON=python3.14 ./configure --prefix=/usr --shared-openssl --shared-zlib --with-intl=small-icu
+
+override_dh_auto_build:
+	$(MAKE) -j$(PARALLEL_JOBS)
+
+override_dh_auto_test:
+	# Upstream test-doc needs eslint dev lockfiles not in release tarball.
+	@:
+
+override_dh_dwz:
+	@echo "Skipping dwz; node binary exceeds dwz DIE limit."
+
+override_dh_auto_install:
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/nodejs-26
+	if [ -x debian/nodejs-26/usr/bin/node ] && [ ! -e debian/nodejs-26/usr/bin/nodejs ]; then \
+		ln -s node debian/nodejs-26/usr/bin/nodejs; \
+	fi
+
+override_dh_fixperms:
+	dh_fixperms
+	for script in \
+		debian/nodejs-26/usr/bin/npm \
+		debian/nodejs-26/usr/bin/npx \
+		debian/nodejs-26/usr/bin/corepack \
+		debian/nodejs-26/usr/lib/node_modules/npm/bin/npm-cli.js \
+		debian/nodejs-26/usr/lib/node_modules/npm/bin/npx-cli.js \
+		debian/nodejs-26/usr/lib/node_modules/corepack/dist/corepack.js; do \
+		if [ -e "$$script" ]; then chmod 0755 "$$script"; fi; \
+	done
