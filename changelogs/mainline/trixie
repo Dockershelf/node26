@@ -1,3 +1,9 @@
+nodejs-26 (26.5.0-1+trixie1) trixie; urgency=medium
+
+  * Update to v26.5.0.
+
+ -- Luis Alejandro Martínez Faneyth <luis@luisalejandro.org>  Thu, 09 Jul 2026 16:18:53 +0000
+
 nodejs-26 (26.0.0-1+trixie1) trixie; urgency=medium
 
   * Initial Dockershelf packaging for Node.js 26.
