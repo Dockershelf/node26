@@ -1,5 +1,11 @@
 nodejs-26 (26.5.0-1+unstable1) unstable; urgency=medium
 
+  * Update to v26.5.0-1-g955e669e03.
+
+ -- Luis Alejandro Martínez Faneyth <luis@luisalejandro.org>  Fri, 10 Jul 2026 01:48:43 +0000
+
+nodejs-26 (26.5.0-1+unstable1) unstable; urgency=medium
+
   * Update to v26.5.0.
 
  -- Luis Alejandro Martínez Faneyth <luis@luisalejandro.org>  Thu, 09 Jul 2026 16:18:54 +0000
