@@ -1,3 +1,9 @@
+nodejs-26 (26.8.2-1+unstable1) unstable; urgency=medium
+
+  * Update to v26.8.2.
+
+ -- Luis Alejandro Martínez Faneyth <luis@luisalejandro.org>  Thu, 10 Sep 2026 14:01:43 +0000
+
 nodejs-26 (26.8.1-1+unstable1) unstable; urgency=medium
 
   * Update to v26.8.1.
