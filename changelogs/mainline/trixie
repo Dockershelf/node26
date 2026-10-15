@@ -1,3 +1,9 @@
+nodejs-26 (26.11.1-1+trixie1) trixie; urgency=medium
+
+  * Update to v26.11.1.
+
+ -- Luis Alejandro Martínez Faneyth <luis@luisalejandro.org>  Thu, 15 Oct 2026 14:37:57 +0000
+
 nodejs-26 (26.11.0-1+trixie1) trixie; urgency=medium
 
   * Update to v26.11.0.
